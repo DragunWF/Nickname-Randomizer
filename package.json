@@ -1,0 +1,19 @@
+{
+  "name": "nicknamerandomizer",
+  "version": "1.0.0",
+  "description": "A nickname randomizer!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DragunWF/NicknameRandomizer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DragunWF/NicknameRandomizer/issues"
+  },
+  "homepage": "https://github.com/DragunWF/NicknameRandomizer#readme"
+}
