@@ -15,10 +15,15 @@ button {
   justify-content: center;
 }
 
+.context-wrapper {
+  flex-direction: column;
+  z-index: 10;
+}
+
 .context h2 {
   text-align: center;
   color: #fff;
-  font-size: 40px;
+  font-size: 36px;
 }
 
 .buttons-container {
@@ -31,4 +36,56 @@ button {
   border: none;
   padding: 10px;
   font-size: 18px;
+  transition: background 0.1s;
+}
+
+.buttons:hover {
+  cursor: pointer;
+  background: #d1d1d1;
+}
+
+/* Dropdown Button */
+.dropbtn {
+  background-color: #fff;
+  color: #1d1c1a;
+  padding: 13px;
+  padding-left: 75px;
+  font-size: 18px;
+  padding-right: 75px;
+  border: none;
+  border-radius: 15px;
+}
+
+.dropdown {
+  margin-top: 15px;
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  background-color: #f1f1f1;
+  min-width: 140px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+  border-radius: 15px;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #d1d1d1;
 }
