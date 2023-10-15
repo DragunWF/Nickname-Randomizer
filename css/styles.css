@@ -30,6 +30,7 @@ button {
   font-size: 36px;
 }
 
+/* Buttons */
 .buttons-container {
   margin-top: 15px;
   gap: 15px;
@@ -94,4 +95,31 @@ button {
 
 .dropdown:hover .dropbtn {
   background-color: #d1d1d1;
+}
+
+/* Preset Creator */
+.preset-creator {
+  color: #fff;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.preset-creator input {
+  border: none;
+  padding: 7px;
+}
+
+.preset-creator label {
+  text-align: left;
+}
+
+.preset-input {
+  gap: 5px;
+  font-size: 18px;
+}
+
+.preset-input button {
+  padding: 5px;
+  font-size: 16px;
+  border-radius: 5px;
 }
