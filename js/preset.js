@@ -19,6 +19,16 @@ class Preset {
       lastNames: this.#lastNames,
     };
   }
+
+  addName(name, isFirstName) {
+    if (isFirstName) {
+      this.#firstNames.push(name);
+    } else {
+      this.#lastNames.push(name);
+    }
+  }
+
+  deleteName(name, isFirstName) {}
 }
 
 export default Preset;
