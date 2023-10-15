@@ -34,21 +34,21 @@
             <div class="preset-input flex">
               <input
                 type="text"
-                id="fname"
+                id="firstName"
                 name="fname"
                 placeholder="Ex: Dragun, CPT, Luq, etc."
               />
-              <button class="buttons">Add</button>
+              <button class="buttons" onclick="addFirstName()">Add</button>
             </div>
             <label for="lname">Last Name:</label>
             <div class="preset-input flex">
               <input
                 type="text"
-                id="lname"
+                id="lastName"
                 name="lname"
                 placeholder="Ex: The First, The Sword, etc."
               />
-              <button class="buttons">Add</button>
+              <button class="buttons" onclick="addLastName()">Add</button>
             </div>
           </form>
         </div>
@@ -69,6 +69,6 @@
       </div>
     </div>
     <script type="module" src="/js/preset.js"></script>
-    <script src="/js/main.js"></script>
+    <script type="module" src="/js/main.js"></script>
   </body>
 </html>
