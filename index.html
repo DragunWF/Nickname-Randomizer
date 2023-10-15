@@ -11,7 +11,7 @@
   <body>
     <div class="wrapper">
       <div class="context flex">
-        <div class="container flex">
+        <div class="container flex hide">
           <h1>Nickname Randomizer</h1>
           <h2 id="output">Output here</h2>
           <div class="buttons-container flex">
@@ -27,7 +27,21 @@
             </div>
           </div>
         </div>
-        <div class="container"></div>
+        <div class="container flex">
+          <form class="preset-creator flex">
+            <h2>Preset Creator</h2>
+            <label for="fname">First name:</label>
+            <div class="preset-input flex">
+              <input type="text" id="fname" name="fname" />
+              <button class="buttons">Add</button>
+            </div>
+            <label for="lname">Last name:</label>
+            <div class="preset-input flex">
+              <input type="text" id="lname" name="lname" />
+              <button class="buttons">Add</button>
+            </div>
+          </form>
+        </div>
       </div>
       <div class="area">
         <ul class="circles">
