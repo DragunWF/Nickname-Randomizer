@@ -1,18 +1,12 @@
-@import url("https://fonts.googleapis.com/css?family=Exo:400,700");
-
 * {
   margin: 0px;
   padding: 0px;
 }
 
-body {
-  font-family: "Exo", sans-serif;
-}
-
 .context {
   width: 100%;
   position: absolute;
-  top: 50vh;
+  top: 40vh;
 }
 
 .context h1 {
