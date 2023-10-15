@@ -9,6 +9,7 @@ const presets = [
     ["The Slut", "The Pro", "The Horny", "The Brave", "The Supergay"]
   ),
 ];
+let currentPreset = new Preset();
 
 function giveName() {
   const firstNameArr = ["Jewker", "CPT", "Dragun", "Faith", "Thrawn", "Mortis"];
@@ -24,6 +25,21 @@ function giveName() {
   )}`;
 }
 
+function addName(isFirstName) {
+  const name = document.getElementById(
+    isFirstName ? "firstName" : "lastName"
+  ).innerText;
+  if (!name.length) {
+    alert(`${isFirstName ? "First name" : "Last name"} cannot be empty!`);
+    return;
+  }
+  // add logic
+}
+
+function getRandomItem(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
 function addFirstName() {
   addName(true);
 }
@@ -32,11 +48,8 @@ function addLastName() {
   lastName(false);
 }
 
-function addName(isFirstName) {
-  const name = document.getElementById(isFirstName ? "firstName" : "lastName");
-  // add logic
-}
+function addPreset() {}
 
-function getRandomItem(arr) {
-  return arr[Math.floor(Math.random() * arr.length)];
+function resetPreset() {
+  let currentPreset = new Preset();
 }
