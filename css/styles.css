@@ -113,6 +113,11 @@ button {
   text-align: left;
 }
 
+.preset-creator input:focus {
+  border-color: #87ceeb;
+  border-width: 5px;
+}
+
 .preset-input {
   gap: 5px;
   font-size: 18px;
