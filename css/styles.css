@@ -9,13 +9,17 @@ button {
   z-index: 10;
 }
 
+.hide {
+  display: none !important;
+}
+
 .flex {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.context-wrapper {
+.container {
   flex-direction: column;
   z-index: 10;
 }
