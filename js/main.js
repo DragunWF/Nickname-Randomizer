@@ -16,6 +16,7 @@ const interfaces = {
 };
 
 let currentPreset = new Preset();
+let selectedPreset = presets[1];
 let presetUIVisible = true; // Always set to false unless testing
 
 function addName(isFirstName) {
@@ -40,14 +41,8 @@ function resetPreset() {
 }
 
 window.giveName = () => {
-  const firstNameArr = ["Jewker", "CPT", "Dragun", "Faith", "Thrawn", "Mortis"];
-  const lastNameArr = [
-    "The Slut",
-    "The Pro",
-    "The Horny",
-    "The Brave",
-    "The Supergay",
-  ];
+  const firstNameArr = selectedPreset.getNames().firstNames;
+  const lastNameArr = selectedPreset.getNames().lastNames;
   outputText.innerText = `${getRandomItem(firstNameArr)} ${getRandomItem(
     lastNameArr
   )}`;
