@@ -17,7 +17,7 @@ const interfaces = {
 };
 
 let currentPreset = new Preset();
-let selectedPreset = presets[1];
+let selectedPreset = presets[1]; // default preset
 let presetUIVisible = true; // Always set to false unless testing
 
 function addName(isFirstName) {
@@ -35,6 +35,18 @@ function getRandomItem(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
+window.resetPreset = () => {
+  // TODO: Implement preset reset
+};
+window.savePreset = () => {
+  // TODO: Implement preset saving
+};
+window.loadPreset = () => {
+  // TODO: Implement preset loading
+};
+window.createPreset = () => {
+  // TODO: Implement preset creation
+};
 window.giveName = () => {
   const firstNameArr = selectedPreset.getNames().firstNames;
   const lastNameArr = selectedPreset.getNames().lastNames;
