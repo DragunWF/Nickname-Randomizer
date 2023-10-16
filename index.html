@@ -11,12 +11,14 @@
   <body>
     <div class="wrapper">
       <div class="context flex">
-        <div class="container flex main hide">
+        <div class="container flex main hide" id="mainUI">
           <h1>Nickname Randomizer</h1>
           <h2 id="output">Output here</h2>
           <div class="buttons-container flex">
             <button class="buttons" onclick="giveName()">Randomize</button>
-            <button class="buttons">Create Preset</button>
+            <button class="buttons" onclick="togglePresetUI()">
+              Create Preset
+            </button>
           </div>
           <div class="dropdown">
             <button class="dropbtn">Preset Selector</button>
@@ -27,8 +29,8 @@
             </div>
           </div>
         </div>
-        <div class="container flex">
-          <form class="preset-creator flex">
+        <div class="container flex" id="presetUI">
+          <div class="preset-creator flex">
             <h2>Preset Creator</h2>
             <label for="fname">First Name:</label>
             <div class="preset-input flex">
@@ -50,13 +52,13 @@
               />
               <button class="buttons" onclick="addLastName()">Add</button>
             </div>
-            <div class="btn-group">
-              <button class="button" id="backBtn">Back</button>
-              <button class="button" id="saveBtn">Save</button>
-              <button class="button" id="loadBtn">Load</button>
-              <button class="button" id="createBtn">Create</button>
+            <div class="button-preset-group">
+              <button onclick="togglePresetUI()">Back</button>
+              <button>Save</button>
+              <button>Load</button>
+              <button>Create</button>
             </div>
-          </form>
+          </div>
         </div>
       </div>
       <div class="area">
@@ -74,7 +76,7 @@
         </ul>
       </div>
     </div>
-    <script type="module" src="/js/preset.js"></script>
-    <script type="module" src="/js/main.js"></script>
+    <script type="module" src="js/preset.js"></script>
+    <script type="module" src="js/main.js"></script>
   </body>
 </html>
