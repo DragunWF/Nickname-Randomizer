@@ -49,7 +49,7 @@ button {
 }
 
 .buttons:hover,
-.btn-group button:hover {
+.button-preset-group button:hover {
   cursor: pointer;
   background: #d1d1d1;
 }
@@ -134,7 +134,7 @@ button {
   border-radius: 5px;
 }
 
-.btn-group .button {
+.button-preset-group button {
   margin-top: 10px;
   background-color: #fff; /* Green */
   border: 1px solid black;
