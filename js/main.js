@@ -2,6 +2,7 @@ import Preset from "./preset.js";
 
 const outputText = document.getElementById("output");
 const presetDropdownButton = document.getElementById("presetDropdownButton");
+const presetsDropdown = document.getElementById("presetsDropdown");
 const presets = [
   new Preset("Dragon's Castle - DragunWF", [], []),
   new Preset(
@@ -67,5 +68,12 @@ window.togglePresetUI = () => {
   interfaces.presetUI.setAttribute("class", presetUIClasses.join(" "));
   interfaces.mainUI.setAttribute("class", mainUIClasses.join(" "));
 };
+
+document.addEventListener("DOMContentLoaded", () => {
+  for (let i = 0; i < presets.length; i++) {
+    presetsDropdown.innerHTML += `<span>${presets[i].getTitle()}</span>`;
+  }
+  presetsDropdown.innerHTML += "<span>Custom</span>";
+});
 
 console.log("main.js has been loaded!");
