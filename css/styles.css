@@ -92,6 +92,7 @@ button {
 .dropdown-content span:hover {
   background-color: #ddd;
   border-radius: 15px;
+  cursor: pointer;
 }
 
 .dropdown:hover .dropdown-content {
