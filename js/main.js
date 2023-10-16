@@ -35,6 +35,13 @@ function getRandomItem(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
+window.selectPreset = (index) => {
+  if (index < 0 || index >= presets.length) {
+    throw new Error("Invalid Index!");
+  }
+  selectedPreset = presets[index];
+  presetDropdownButton.innerText = selectedPreset.getTitle();
+};
 window.resetPreset = () => {
   // TODO: Implement preset reset
 };
@@ -77,7 +84,9 @@ window.togglePresetUI = () => {
 
 document.addEventListener("DOMContentLoaded", () => {
   for (let i = 0; i < presets.length; i++) {
-    presetsDropdown.innerHTML += `<span>${presets[i].getTitle()}</span>`;
+    presetsDropdown.innerHTML += `
+      <span onclick="selectPreset(${i})">${presets[i].getTitle()}</span>
+    `;
   }
   presetsDropdown.innerHTML += "<span>Custom</span>";
 });
