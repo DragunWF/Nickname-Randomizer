@@ -59,9 +59,9 @@ button {
   background-color: #fff;
   color: var(--color-text);
   padding: 13px;
-  padding-left: 75px;
+  padding-left: 60px;
   font-size: 18px;
-  padding-right: 75px;
+  padding-right: 60px;
   border: none;
   border-radius: 15px;
 }
