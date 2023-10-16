@@ -1,6 +1,7 @@
 import Preset from "./preset.js";
 
 const outputText = document.getElementById("output");
+const presetDropdownButton = document.getElementById("presetDropdownButton");
 const presets = [
   new Preset("Dragon's Castle - DragunWF", [], []),
   new Preset(
@@ -16,20 +17,6 @@ const interfaces = {
 
 let currentPreset = new Preset();
 let presetUIVisible = true; // Always set to false unless testing
-
-function giveName() {
-  const firstNameArr = ["Jewker", "CPT", "Dragun", "Faith", "Thrawn", "Mortis"];
-  const lastNameArr = [
-    "The Slut",
-    "The Pro",
-    "The Horny",
-    "The Brave",
-    "The Supergay",
-  ];
-  outputText.innerText = `${getRandomItem(firstNameArr)} ${getRandomItem(
-    lastNameArr
-  )}`;
-}
 
 function addName(isFirstName) {
   const name = document.getElementById(
@@ -52,6 +39,19 @@ function resetPreset() {
   let currentPreset = new Preset();
 }
 
+window.giveName = () => {
+  const firstNameArr = ["Jewker", "CPT", "Dragun", "Faith", "Thrawn", "Mortis"];
+  const lastNameArr = [
+    "The Slut",
+    "The Pro",
+    "The Horny",
+    "The Brave",
+    "The Supergay",
+  ];
+  outputText.innerText = `${getRandomItem(firstNameArr)} ${getRandomItem(
+    lastNameArr
+  )}`;
+};
 window.addFirstName = () => addName(true);
 window.addLastName = () => addName(false);
 window.togglePresetUI = () => {
