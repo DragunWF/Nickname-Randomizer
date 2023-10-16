@@ -87,6 +87,7 @@ button {
   display: block;
   transition: background 0.15s;
   border-radius: 15px;
+  overflow: hidden;
 }
 
 .dropdown-content span:hover {
