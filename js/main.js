@@ -55,9 +55,11 @@ window.togglePresetUI = () => {
 
   presetUIVisible = !presetUIVisible;
   if (presetUIVisible) {
-    presetUIClasses.pop(); // last element will always be "hide"
+    // Last element will always be "hide"
+    presetUIClasses.pop();
     mainUIClasses.push("hide");
   } else {
+    // Same concept applies, as stated in the previous code block
     mainUIClasses.pop();
     presetUIClasses.push("hide");
   }
