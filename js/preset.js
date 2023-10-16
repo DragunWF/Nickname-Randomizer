@@ -31,4 +31,6 @@ class Preset {
   deleteName(name, isFirstName) {}
 }
 
+console.log("preset.js has been loaded!");
+
 export default Preset;
