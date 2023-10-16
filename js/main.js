@@ -35,12 +35,6 @@ function getRandomItem(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-function addPreset() {}
-
-function resetPreset() {
-  let currentPreset = new Preset();
-}
-
 window.giveName = () => {
   const firstNameArr = selectedPreset.getNames().firstNames;
   const lastNameArr = selectedPreset.getNames().lastNames;
