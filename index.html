@@ -45,10 +45,19 @@
         <div class="modal" id="resetModal">
           <div class="modal-content">
             <span class="close" id="closeResetModal">&times;</span>
+            <h2>Are you sure?</h2>
             <p>
               Are you sure you want to reset your current preset? This will
               remove all first names and last names previously added.
             </p>
+            <div class="buttons-container flex">
+              <button class="buttons" onclick="closeResetModal()">
+                No, Go Back...
+              </button>
+              <button class="buttons" onclick="resetPreset()">
+                Yes, Please Reset!
+              </button>
+            </div>
           </div>
         </div>
         <!-- End of Reset Modal -->
@@ -79,10 +88,10 @@
             </div>
             <div class="preset-button-group">
               <button onclick="togglePresetUI()">Back</button>
-              <button onclick="resetPreset()">Reset</button>
+              <button onclick="openResetModal()">Reset</button>
               <button onclick="savePreset()">Save</button>
               <button onclick="loadPreset()">Load</button>
-              <button onclick="createPreset()">Create</button>
+              <button onclick="openCreateModal()">Create</button>
             </div>
             <div class="preset-dropdown-group flex">
               <div class="dropdown">
