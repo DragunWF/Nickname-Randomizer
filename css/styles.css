@@ -183,7 +183,17 @@ button {
   color: var(--color-text);
 }
 
-/* Modal Content/Box */
+.modal input {
+  padding: 7px;
+  border-color: #1d1c1a;
+  border-width: 3px;
+  transition: all 0.15s;
+}
+
+.modal input:focus {
+  border-radius: 15px;
+}
+
 .modal-content {
   background-color: #fefefe;
   margin: 15% auto; /* 15% from the top and centered */
@@ -192,7 +202,6 @@ button {
   width: 80%; /* Could be more or less, depending on screen size */
 }
 
-/* The Close Button */
 .close {
   color: #aaa;
   float: right;
@@ -205,4 +214,14 @@ button {
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+.create-modal-container {
+  flex-direction: column;
+  gap: 4px;
+}
+
+.create-modal-container label {
+  margin-top: 5px;
+  font-weight: bold;
 }
