@@ -126,16 +126,16 @@ window.togglePresetUI = () => {
 };
 
 // One line arrow functions
+window.addFirstName = () => addName(true);
+window.addLastName = () => addName(false);
+// End of one line arrow functions
+
 document.getElementById("closeResetModal").onclick = () => {
   closeModal("reset");
 };
 document.getElementById("closeCreateModal").onclick = () => {
   closeModal("create");
 };
-window.addFirstName = () => addName(true);
-window.addLastName = () => addName(false);
-// End of one line arrow functions
-
 document.addEventListener("DOMContentLoaded", () => {
   for (let i = 0; i < presets.length; i++) {
     presetsDropdown.innerHTML += `
