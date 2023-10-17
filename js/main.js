@@ -15,20 +15,41 @@ const interfaces = {
   presetUI: document.getElementById("presetUI"),
   mainUI: document.getElementById("mainUI"),
 };
+const presetDropdowns = {
+  firstNames: document.getElementById("firstNames"),
+  lastNames: document.getElementById("lastNames"),
+};
+const presetFields = {
+  firstName: document.getElementById("firstNameField"),
+  lastName: document.getElementById("lastNameField"),
+};
 
 let currentPreset = new Preset();
 let selectedPreset = presets[1]; // default preset
 let presetUIVisible = true; // Always set to false unless testing
 
 function addName(isFirstName) {
-  const name = document.getElementById(
-    isFirstName ? "firstName" : "lastName"
-  ).innerText;
-  if (!name.length) {
+  const content = isFirstName
+    ? presetFields.firstName.value
+    : presetFields.lastName.value;
+  if (!content) {
     alert(`${isFirstName ? "First name" : "Last name"} cannot be empty!`);
     return;
   }
-  // add logic
+
+  if (isFirstName) {
+    presetDropdowns.firstNames.innerHTML += `
+      <span>${content}</span>
+    `;
+    presetFields.firstName.value = "";
+    currentPreset.addFirstName(content);
+  } else {
+    presetDropdowns.lastNames.innerHTML += `
+      <span>${content}</span>
+    `;
+    presetFields.lastName.value = "";
+    currentPreset.addLastName(content);
+  }
 }
 
 function getRandomItem(arr) {
