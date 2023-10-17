@@ -23,6 +23,10 @@ const presetFields = {
   firstName: document.getElementById("firstNameField"),
   lastName: document.getElementById("lastNameField"),
 };
+const modals = {
+  create: document.getElementById("createModal"),
+  reset: document.getElementById("resetModal"),
+};
 
 let currentPreset = new Preset();
 let selectedPreset = presets[1]; // default preset
@@ -87,6 +91,7 @@ window.resetPreset = () => {
     presetDropdowns[key].innerHTML = "";
   }
   currentPreset = new Preset();
+  window.closeResetModal();
 };
 window.savePreset = () => {
   // TODO: Implement preset saving
@@ -96,8 +101,7 @@ window.loadPreset = () => {
 };
 window.createPreset = () => {
   // TODO: Implement preset creation
-  const modal = document.getElementById("createModal");
-  modal.style.display = "block";
+  modals.create.style.display = "block";
 };
 window.giveName = () => {
   const firstNameArr = selectedPreset.getNames().firstNames;
@@ -126,15 +130,19 @@ window.togglePresetUI = () => {
 };
 
 // One line arrow functions
+window.openCreateModal = () => (modals.create.style.display = "block");
+window.openResetModal = () => (modals.reset.style.display = "block");
+window.closeCreateModal = () => closeModal("create");
+window.closeResetModal = () => closeModal("reset");
 window.addFirstName = () => addName(true);
 window.addLastName = () => addName(false);
 // End of one line arrow functions
 
 document.getElementById("closeResetModal").onclick = () => {
-  closeModal("reset");
+  window.closeResetModal();
 };
 document.getElementById("closeCreateModal").onclick = () => {
-  closeModal("create");
+  window.closeCreateModal();
 };
 document.addEventListener("DOMContentLoaded", () => {
   for (let i = 0; i < presets.length; i++) {
