@@ -36,11 +36,19 @@
         <div class="modal" id="createModal">
           <div class="modal-content">
             <span class="close" id="closeCreateModal">&times;</span>
-            <h2>Create Preset</h2>
-            <p>Enter the title of your preset</p>
-            <div class="buttons-container flex">
-              <button class="buttons">Back</button>
-              <button class="buttons">Create</button>
+            <div class="create-modal-container flex">
+              <h3>Create Preset</h3>
+              <p>Enter the title of your preset</p>
+              <label for="fname">Preset Title</label>
+              <input
+                type="text"
+                id="titleField"
+                placeholder="Type your title here..."
+              />
+              <div class="buttons-container flex">
+                <button class="buttons">Back</button>
+                <button class="buttons">Create</button>
+              </div>
             </div>
           </div>
         </div>
@@ -76,7 +84,6 @@
               <input
                 type="text"
                 id="firstNameField"
-                name="fname"
                 placeholder="Ex: Dragun, CPT, Luq, etc."
               />
               <button class="buttons" onclick="addFirstName()">Add</button>
@@ -86,7 +93,6 @@
               <input
                 type="text"
                 id="lastNameField"
-                name="lname"
                 placeholder="Ex: The First, The Sword, etc."
               />
               <button class="buttons" onclick="addLastName()">Add</button>
