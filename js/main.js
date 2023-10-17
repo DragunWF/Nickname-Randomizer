@@ -52,6 +52,21 @@ function addName(isFirstName) {
   }
 }
 
+function closeModal(modalName) {
+  let modalID = null;
+  switch (modalName) {
+    case "create":
+      modalID = "createModal";
+      break;
+    case "reset":
+      modalID = "resetModal";
+      break;
+    default:
+      throw new Error(`Unknown modal name: ${modalName}`);
+  }
+  document.getElementById(modalID).style.display = "none";
+}
+
 function getRandomItem(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
@@ -81,8 +96,8 @@ window.loadPreset = () => {
 };
 window.createPreset = () => {
   // TODO: Implement preset creation
-  presets.push(currentPreset);
-  alert("Preset has been created!");
+  const modal = document.getElementById("createModal");
+  modal.style.display = "block";
 };
 window.giveName = () => {
   const firstNameArr = selectedPreset.getNames().firstNames;
@@ -91,8 +106,6 @@ window.giveName = () => {
     lastNameArr
   )}`;
 };
-window.addFirstName = () => addName(true);
-window.addLastName = () => addName(false);
 window.togglePresetUI = () => {
   const presetUIClasses = interfaces.presetUI.getAttribute("class").split(" ");
   const mainUIClasses = interfaces.mainUI.getAttribute("class").split(" ");
@@ -111,6 +124,17 @@ window.togglePresetUI = () => {
   interfaces.presetUI.setAttribute("class", presetUIClasses.join(" "));
   interfaces.mainUI.setAttribute("class", mainUIClasses.join(" "));
 };
+
+// One line arrow functions
+document.getElementById("closeResetModal").onclick = () => {
+  closeModal("reset");
+};
+document.getElementById("closeCreateModal").onclick = () => {
+  closeModal("create");
+};
+window.addFirstName = () => addName(true);
+window.addLastName = () => addName(false);
+// End of one line arrow functions
 
 document.addEventListener("DOMContentLoaded", () => {
   for (let i = 0; i < presets.length; i++) {
