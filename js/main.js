@@ -81,6 +81,7 @@ window.loadPreset = () => {
 };
 window.createPreset = () => {
   // TODO: Implement preset creation
+  presets.push(currentPreset);
   alert("Preset has been created!");
 };
 window.giveName = () => {
