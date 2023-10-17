@@ -4,9 +4,9 @@ class Preset {
   #lastNames;
 
   constructor(title, firstNames, lastNames) {
-    this.#title = title;
-    this.#firstNames = firstNames;
-    this.#lastNames = lastNames;
+    this.#title = title ? title : "No Title";
+    this.#firstNames = firstNames ? firstNames : [];
+    this.#lastNames = lastNames ? lastNames : [];
   }
 
   getTitle() {
@@ -20,7 +20,15 @@ class Preset {
     };
   }
 
-  addName(name, isFirstName) {
+  addFirstName(name) {
+    this.#addName(name, true);
+  }
+
+  addLastName(name) {
+    this.#addName(name, false);
+  }
+
+  #addName(name, isFirstName) {
     if (isFirstName) {
       this.#firstNames.push(name);
     } else {
