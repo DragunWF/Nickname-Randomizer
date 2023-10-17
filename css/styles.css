@@ -148,7 +148,7 @@ button {
 
 .preset-button-group button {
   margin-top: 10px;
-  background-color: #fff; /* Green */
+  background-color: #fff;
   border: 1px solid black;
   color: var(--color-text);
   padding: 5px 16px;
