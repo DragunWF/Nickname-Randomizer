@@ -28,6 +28,14 @@ class Preset {
     this.#addName(name, false);
   }
 
+  deleteFirstName(index) {
+    this.#deleteName(index, true);
+  }
+
+  deleteLastName(index) {
+    this.#deleteName(index, false);
+  }
+
   #addName(name, isFirstName) {
     if (isFirstName) {
       this.#firstNames.push(name);
@@ -36,7 +44,7 @@ class Preset {
     }
   }
 
-  deleteName(name, isFirstName) {}
+  #deleteName(index, isFirstName) {}
 }
 
 console.log("preset.js has been loaded!");
