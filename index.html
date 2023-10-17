@@ -16,10 +16,8 @@
           <h1>Nickname Randomizer</h1>
           <h2 id="output">Output here</h2>
           <div class="buttons-container flex">
-            <button class="buttons" onclick="giveName()">Randomize</button>
-            <button class="buttons" onclick="togglePresetUI()">
-              Create Preset
-            </button>
+            <button class="buttons" id="randomizeButton">Randomize</button>
+            <button class="buttons toggle-preset-ui">Create Preset</button>
           </div>
           <div class="dropdown">
             <button class="dropbtn" id="presetDropdownButton">
@@ -46,8 +44,10 @@
                 placeholder="Type your title here..."
               />
               <div class="buttons-container flex">
-                <button class="buttons">Back</button>
-                <button class="buttons">Create</button>
+                <button class="buttons" id="closeCreateModalButton">
+                  Back
+                </button>
+                <button class="buttons" id="createButton">Create</button>
               </div>
             </div>
           </div>
@@ -64,10 +64,10 @@
               remove all first names and last names previously added.
             </p>
             <div class="buttons-container flex">
-              <button class="buttons" onclick="closeResetModal()">
+              <button class="buttons" id="closeResetModalButton">
                 No, Go Back...
               </button>
-              <button class="buttons" onclick="resetPreset()">
+              <button class="buttons" id="resetPresetButton">
                 Yes, Please Reset!
               </button>
             </div>
@@ -86,7 +86,7 @@
                 id="firstNameField"
                 placeholder="Ex: Dragun, CPT, Luq, etc."
               />
-              <button class="buttons" onclick="addFirstName()">Add</button>
+              <button class="buttons" id="addFirstNameButton">Add</button>
             </div>
             <label for="lname">Last Name:</label>
             <div class="preset-input flex">
@@ -95,14 +95,14 @@
                 id="lastNameField"
                 placeholder="Ex: The First, The Sword, etc."
               />
-              <button class="buttons" onclick="addLastName()">Add</button>
+              <button class="buttons" id="addLastNameButton">Add</button>
             </div>
             <div class="preset-button-group">
-              <button onclick="togglePresetUI()">Back</button>
-              <button onclick="openResetModal()">Reset</button>
-              <button onclick="savePreset()">Save</button>
-              <button onclick="loadPreset()">Load</button>
-              <button onclick="openCreateModal()">Create</button>
+              <button class="toggle-preset-ui">Back</button>
+              <button id="openResetModalButton">Reset</button>
+              <button id="savePresetButton">Save</button>
+              <button id="loadPresetButton">Load</button>
+              <button id="openCreateModalButton">Create</button>
             </div>
             <div class="preset-dropdown-group flex">
               <div class="dropdown">

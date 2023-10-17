@@ -75,14 +75,15 @@ function getRandomItem(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-window.selectPreset = (index) => {
+document.getElementById("selectPresetButton").addEventListener("click", () => {
   if (index < 0 || index >= presets.length) {
     throw new Error("Invalid Index!");
   }
   selectedPreset = presets[index];
   presetDropdownButton.innerText = selectedPreset.getTitle();
-};
-window.resetPreset = () => {
+});
+
+document.getElementById("resetPresetButton").addEventListener("click", () => {
   // TODO: Implement preset reset
   for (let key in presetFields) {
     presetFields[key].value = "";
@@ -92,43 +93,30 @@ window.resetPreset = () => {
   }
   currentPreset = new Preset();
   window.closeResetModal();
-};
-window.savePreset = () => {
+});
+
+document.getElementById("savePresetButton").addEventListener("click", () => {
   // TODO: Implement preset saving
-};
-window.loadPreset = () => {
+});
+
+document.getElementById("loadPresetButton").addEventListener("click", () => {
   // TODO: Implement preset loading
-};
-window.createPreset = () => {
+});
+
+document.getElementById("createPresetButton").addEventListener("click", () => {
   // TODO: Implement preset creation
   modals.create.style.display = "block";
-};
-window.giveName = () => {
+});
+
+document.getElementById("randomizeButton").addEventListener("click", () => {
   const firstNameArr = selectedPreset.getNames().firstNames;
   const lastNameArr = selectedPreset.getNames().lastNames;
   outputText.innerText = `${getRandomItem(firstNameArr)} ${getRandomItem(
     lastNameArr
   )}`;
-};
-window.togglePresetUI = () => {
-  const presetUIClasses = interfaces.presetUI.getAttribute("class").split(" ");
-  const mainUIClasses = interfaces.mainUI.getAttribute("class").split(" ");
+});
 
-  presetUIVisible = !presetUIVisible;
-  if (presetUIVisible) {
-    // Last element will always be "hide"
-    presetUIClasses.pop();
-    mainUIClasses.push("hide");
-  } else {
-    // Same concept applies, as stated in the previous code block
-    mainUIClasses.pop();
-    presetUIClasses.push("hide");
-  }
-
-  interfaces.presetUI.setAttribute("class", presetUIClasses.join(" "));
-  interfaces.mainUI.setAttribute("class", mainUIClasses.join(" "));
-};
-
+// TODO: Replace with event listeners
 // One line arrow functions
 window.openCreateModal = () => (modals.create.style.display = "block");
 window.openResetModal = () => (modals.reset.style.display = "block");
@@ -141,9 +129,11 @@ window.addLastName = () => addName(false);
 document.getElementById("closeResetModal").onclick = () => {
   window.closeResetModal();
 };
+
 document.getElementById("closeCreateModal").onclick = () => {
   window.closeCreateModal();
 };
+
 document.addEventListener("DOMContentLoaded", () => {
   for (let i = 0; i < presets.length; i++) {
     presetsDropdown.innerHTML += `
@@ -151,6 +141,31 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
   }
   presetsDropdown.innerHTML += "<span>Custom</span>";
+
+  // Add event listeners to all toggle buttons
+  const toggleButtons = document.getElementsByClassName("preset-toggle-ui");
+  for (let i = 0; i < toggleButtons.length; i++) {
+    toggleButtons[i].addEventListener("click", () => {
+      const presetUIClasses = interfaces.presetUI
+        .getAttribute("class")
+        .split(" ");
+      const mainUIClasses = interfaces.mainUI.getAttribute("class").split(" ");
+
+      presetUIVisible = !presetUIVisible;
+      if (presetUIVisible) {
+        // Last element will always be "hide"
+        presetUIClasses.pop();
+        mainUIClasses.push("hide");
+      } else {
+        // Same concept applies, as stated in the previous code block
+        mainUIClasses.pop();
+        presetUIClasses.push("hide");
+      }
+
+      interfaces.presetUI.setAttribute("class", presetUIClasses.join(" "));
+      interfaces.mainUI.setAttribute("class", mainUIClasses.join(" "));
+    });
+  }
 });
 
 console.log("main.js has been loaded!");
