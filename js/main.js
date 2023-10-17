@@ -65,6 +65,13 @@ window.selectPreset = (index) => {
 };
 window.resetPreset = () => {
   // TODO: Implement preset reset
+  for (let key in presetFields) {
+    presetFields[key].value = "";
+  }
+  for (let key in presetDropdowns) {
+    presetDropdowns[key].innerHTML = "";
+  }
+  currentPreset = new Preset();
 };
 window.savePreset = () => {
   // TODO: Implement preset saving
@@ -74,6 +81,7 @@ window.loadPreset = () => {
 };
 window.createPreset = () => {
   // TODO: Implement preset creation
+  alert("Preset has been created!");
 };
 window.giveName = () => {
   const firstNameArr = selectedPreset.getNames().firstNames;
