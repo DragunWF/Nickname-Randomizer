@@ -75,13 +75,45 @@ function getRandomItem(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-document.getElementById("selectPresetButton").addEventListener("click", () => {
-  if (index < 0 || index >= presets.length) {
-    throw new Error("Invalid Index!");
+document.addEventListener("DOMContentLoaded", () => {
+  for (let i = 0; i < presets.length; i++) {
+    presetsDropdown.innerHTML += `
+      <span onclick="selectPreset(${i})">${presets[i].getTitle()}</span>
+    `;
   }
-  selectedPreset = presets[index];
-  presetDropdownButton.innerText = selectedPreset.getTitle();
+  presetsDropdown.innerHTML += "<span>Custom</span>";
+
+  // Add event listeners to all toggle buttons
+  const toggleButtons = document.getElementsByClassName("toggle-preset-ui");
+  for (let i = 0; i < toggleButtons.length; i++) {
+    toggleButtons[i].addEventListener("click", () => {
+      const presetUIClasses = interfaces.presetUI
+        .getAttribute("class")
+        .split(" ");
+      const mainUIClasses = interfaces.mainUI.getAttribute("class").split(" ");
+
+      presetUIVisible = !presetUIVisible;
+      if (presetUIVisible) {
+        // Last element will always be "hide"
+        presetUIClasses.pop();
+        mainUIClasses.push("hide");
+      } else {
+        // Same concept applies, as stated in the previous code block
+        mainUIClasses.pop();
+        presetUIClasses.push("hide");
+      }
+
+      interfaces.presetUI.setAttribute("class", presetUIClasses.join(" "));
+      interfaces.mainUI.setAttribute("class", mainUIClasses.join(" "));
+    });
+  }
 });
+
+document
+  .getElementById("openCreateModalButton")
+  .addEventListener("click", () => {
+    modals.create.style.display = "block";
+  });
 
 document.getElementById("resetPresetButton").addEventListener("click", () => {
   // TODO: Implement preset reset
@@ -116,56 +148,40 @@ document.getElementById("randomizeButton").addEventListener("click", () => {
   )}`;
 });
 
-// TODO: Replace with event listeners
-// One line arrow functions
-window.openCreateModal = () => (modals.create.style.display = "block");
-window.openResetModal = () => (modals.reset.style.display = "block");
-window.closeCreateModal = () => closeModal("create");
-window.closeResetModal = () => closeModal("reset");
-window.addFirstName = () => addName(true);
-window.addLastName = () => addName(false);
-// End of one line arrow functions
+document
+  .getElementById("openCreateModalButton")
+  .addEventListener("click", () => (modals.create.style.display = "block"));
 
-document.getElementById("closeResetModal").onclick = () => {
-  window.closeResetModal();
-};
+document
+  .getElementById("openResetModalButton")
+  .addEventListener("click", () => (modals.reset.style.display = "block"));
 
-document.getElementById("closeCreateModal").onclick = () => {
-  window.closeCreateModal();
-};
+document
+  .getElementById("addFirstNameButton")
+  .addEventListener("click", () => addName(true));
 
-document.addEventListener("DOMContentLoaded", () => {
-  for (let i = 0; i < presets.length; i++) {
-    presetsDropdown.innerHTML += `
-      <span onclick="selectPreset(${i})">${presets[i].getTitle()}</span>
-    `;
+document
+  .getElementById("addLastNameButton")
+  .addEventListener("click", () => addName(false));
+
+document
+  .getElementById("closeResetModal")
+  .addEventListener("click", () => closeModal("reset"));
+
+document
+  .getElementById("closeCreateModal")
+  .addEventListener("click", () => closeModal("create"));
+
+document
+  .getElementById("closeCreateModalButton")
+  .addEventListener("click", () => closeModal("create"));
+
+window.selectPreset = (index) => {
+  if (index < 0 || index >= presets.length) {
+    throw new Error("Invalid Index!");
   }
-  presetsDropdown.innerHTML += "<span>Custom</span>";
-
-  // Add event listeners to all toggle buttons
-  const toggleButtons = document.getElementsByClassName("preset-toggle-ui");
-  for (let i = 0; i < toggleButtons.length; i++) {
-    toggleButtons[i].addEventListener("click", () => {
-      const presetUIClasses = interfaces.presetUI
-        .getAttribute("class")
-        .split(" ");
-      const mainUIClasses = interfaces.mainUI.getAttribute("class").split(" ");
-
-      presetUIVisible = !presetUIVisible;
-      if (presetUIVisible) {
-        // Last element will always be "hide"
-        presetUIClasses.pop();
-        mainUIClasses.push("hide");
-      } else {
-        // Same concept applies, as stated in the previous code block
-        mainUIClasses.pop();
-        presetUIClasses.push("hide");
-      }
-
-      interfaces.presetUI.setAttribute("class", presetUIClasses.join(" "));
-      interfaces.mainUI.setAttribute("class", mainUIClasses.join(" "));
-    });
-  }
-});
+  selectedPreset = presets[index];
+  presetDropdownButton.innerText = selectedPreset.getTitle();
+};
 
 console.log("main.js has been loaded!");
