@@ -4,9 +4,9 @@ const outputText = document.getElementById("output");
 const presetDropdownButton = document.getElementById("presetDropdownButton");
 const presetsDropdown = document.getElementById("presetsDropdown");
 const presets = [
-  new Preset("Dragon's Castle - DragunWF", [], []),
+  new Preset("DragunWF (Default)", [], []),
   new Preset(
-    "Dragon's Castle - Thrawn",
+    "Thrawn",
     ["Jewker", "CPT", "Dragun", "Faith", "Thrawn", "Mortis"],
     ["The Slut", "The Pro", "The Horny", "The Brave", "The Supergay"]
   ),
