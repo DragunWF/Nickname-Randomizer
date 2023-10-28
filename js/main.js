@@ -4,6 +4,7 @@ const outputText = document.getElementById("output");
 const presetDropdownButton = document.getElementById("presetDropdownButton");
 const presetsDropdown = document.getElementById("presetsDropdown");
 const createPresetHeader = document.getElementById("createPresetHeader");
+const loadFileInput = document.getElementById("loadFileInput");
 
 // This button also serves as a saving button for presets and not just creation
 const createPresetButton = document.getElementById("createPresetButton");
@@ -205,8 +206,37 @@ document.getElementById("resetPresetButton").addEventListener("click", () => {
   closeModal("reset");
 });
 
+loadFileInput.addEventListener("change", () => {
+  try {
+    const selectedFile = loadFileInput.files[0];
+    if (selectedFile) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const data = JSON.parse(event.target.result); // parsing file contents
+        currentPreset = new Preset(data.title, data.firstNames, data.lastNames);
+
+        presetDropdowns.firstNames.innerHTML = "";
+        presetDropdowns.lastNames.innerHTML = "";
+        for (let name of currentPreset.getNames().firstNames) {
+          presetDropdowns.firstNames.innerHTML += `<span>${name}</span>`;
+        }
+        for (let name of currentPreset.getNames().lastNames) {
+          presetDropdowns.lastNames.innerHTML += `<span>${name}</span>`;
+        }
+      };
+      reader.readAsText(selectedFile);
+      presets.push(currentPreset);
+    } else {
+      alert("No file has been selected!");
+    }
+  } catch (error) {
+    console.error(error);
+    alert("Invalid save file!");
+  }
+});
+
 document.getElementById("loadPresetButton").addEventListener("click", () => {
-  // TODO: Implement preset loading
+  loadFileInput.click();
 });
 
 createPresetButton.addEventListener("click", () => {
