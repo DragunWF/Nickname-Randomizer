@@ -80,14 +80,19 @@ button {
 .dropdown-content {
   display: none;
   background-color: #f1f1f1;
-  min-width: 140px;
+  min-width: 100px;
+  max-width: 100px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   border-radius: 15px;
 }
 
+/* The tags from these are generated from JavaScript */
 .dropdown-content span {
+  background: #f1f1f1;
   color: var(--color-text);
-  padding: 12px 16px;
+  min-width: 100px;
+  max-width: 100px;
+  padding: 7px 12px;
   text-decoration: none;
   display: block;
   transition: background 0.15s;
@@ -100,9 +105,10 @@ button {
   border-radius: 15px;
   cursor: pointer;
 }
+/* End */
 
 .dropdown:hover .dropdown-content {
-  display: block;
+  display: inline;
 }
 
 .dropdown:hover .dropbtn {
@@ -163,6 +169,10 @@ button {
   cursor: pointer;
   float: left;
   transition: background 0.15s;
+}
+
+.preset-button-group button:hover {
+  background: #d9d7d7;
 }
 
 /* The Modal */
