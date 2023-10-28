@@ -140,11 +140,19 @@ document.getElementById("createPresetButton").addEventListener("click", () => {
   modals.create.style.display = "block";
   const firstNames = currentPreset.getNames().firstNames;
   const lastNames = currentPreset.getNames().lastNames;
-  const title = document.getElementById("title").value;
+  const title = document.getElementById("titleField").value;
 
   if (!title.length) {
     alert("Please fill in a title for this preset!");
+  } else {
+    const takenTitles = presets.map((preset) => preset.title);
+    if (takenTitles.includes(title)) {
+      alert(
+        "There is a preset that already uses the same title. Please make a unique title!"
+      );
+    }
   }
+
   if (!firstNames.length && !lastNames.length) {
     alert(
       "Your first name and last name lists are empty! Please fill them in."
@@ -154,6 +162,7 @@ document.getElementById("createPresetButton").addEventListener("click", () => {
   } else if (!lastNames.length) {
     alert("Your last name list is empty! Please fill them in.");
   } else {
+    presets.push(currentPreset);
     closeModal("create");
     alert("Your preset has been created!");
   }
@@ -167,6 +176,7 @@ document.getElementById("randomizeButton").addEventListener("click", () => {
   )}`;
 });
 
+/* One line callbacks */
 document
   .getElementById("openCreateModalButton")
   .addEventListener("click", () => (modals.create.style.display = "block"));
@@ -198,6 +208,7 @@ document
 document
   .getElementById("closeCreateModalButton")
   .addEventListener("click", () => closeModal("create"));
+/* End of one line callbacks */
 
 window.selectPreset = (index) => {
   if (index < 0 || index >= presets.length) {
