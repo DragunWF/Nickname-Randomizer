@@ -209,12 +209,21 @@ document.getElementById("resetPresetButton").addEventListener("click", () => {
 loadFileInput.addEventListener("change", () => {
   try {
     const selectedFile = loadFileInput.files[0];
+
+    const tempSplit = selectedFile.name.split(".");
+    const fileExtension = tempSplit[tempSplit.length - 1];
+    if (fileExtension !== "json") {
+      alert("File must be in JSON format");
+      return;
+    }
+
     if (selectedFile) {
       const reader = new FileReader();
       reader.onload = (event) => {
         const data = JSON.parse(event.target.result); // parsing file contents
         currentPreset = new Preset(data.title, data.firstNames, data.lastNames);
 
+        // Apply new data to UI elements
         presetDropdowns.firstNames.innerHTML = "";
         presetDropdowns.lastNames.innerHTML = "";
         for (let name of currentPreset.getNames().firstNames) {
