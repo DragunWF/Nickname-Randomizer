@@ -240,3 +240,7 @@ button {
   margin-top: 5px;
   font-weight: bold;
 }
+
+#loadFileInput {
+  display: none;
+}
