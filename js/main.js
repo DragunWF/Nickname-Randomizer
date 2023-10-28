@@ -56,7 +56,10 @@ function addName(isFirstName) {
   }
 }
 
-function closeModal(modalName) {
+function toggleModal(modalName, operation) {
+  if (operation !== "open" && operation !== "close") {
+    throw new Error("Unknown operation!");
+  }
   let modalID = null;
   switch (modalName) {
     case "create":
@@ -68,7 +71,16 @@ function closeModal(modalName) {
     default:
       throw new Error(`Unknown modal name: ${modalName}`);
   }
-  document.getElementById(modalID).style.display = "none";
+  const attribute = operation === "open" ? "block" : "none";
+  document.getElementById(modalID).style.display = attribute;
+}
+
+function openModal(modalName) {
+  toggleModal(modalName, "open");
+}
+
+function closeModal(modalName) {
+  toggleModal(modalName, "close");
 }
 
 function getRandomItem(arr) {
@@ -198,19 +210,11 @@ document.getElementById("randomizeButton").addEventListener("click", () => {
 /* One line callbacks */
 document
   .getElementById("openCreateModalButton")
-  .addEventListener("click", () => (modals.create.style.display = "block"));
+  .addEventListener("click", () => openModal("create"));
 
 document
   .getElementById("openResetModalButton")
-  .addEventListener("click", () => (modals.reset.style.display = "block"));
-
-document
-  .getElementById("addFirstNameButton")
-  .addEventListener("click", () => addName(true));
-
-document
-  .getElementById("addLastNameButton")
-  .addEventListener("click", () => addName(false));
+  .addEventListener("click", () => openModal("reset"));
 
 document
   .getElementById("closeResetModal")
@@ -227,6 +231,14 @@ document
 document
   .getElementById("closeCreateModalButton")
   .addEventListener("click", () => closeModal("create"));
+
+document
+  .getElementById("addFirstNameButton")
+  .addEventListener("click", () => addName(true));
+
+document
+  .getElementById("addLastNameButton")
+  .addEventListener("click", () => addName(false));
 /* End of one line callbacks */
 
 window.selectPreset = (index) => {
