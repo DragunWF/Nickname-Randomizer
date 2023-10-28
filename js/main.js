@@ -124,7 +124,7 @@ document.getElementById("resetPresetButton").addEventListener("click", () => {
     presetDropdowns[key].innerHTML = "";
   }
   currentPreset = new Preset();
-  window.closeResetModal();
+  closeModal("reset");
 });
 
 document.getElementById("savePresetButton").addEventListener("click", () => {
@@ -138,6 +138,25 @@ document.getElementById("loadPresetButton").addEventListener("click", () => {
 document.getElementById("createPresetButton").addEventListener("click", () => {
   // TODO: Implement preset creation
   modals.create.style.display = "block";
+  const firstNames = currentPreset.getNames().firstNames;
+  const lastNames = currentPreset.getNames().lastNames;
+  const title = document.getElementById("title").value;
+
+  if (!title.length) {
+    alert("Please fill in a title for this preset!");
+  }
+  if (!firstNames.length && !lastNames.length) {
+    alert(
+      "Your first name and last name lists are empty! Please fill them in."
+    );
+  } else if (!firstNames.length) {
+    alert("Your first name list is empty! Please fill them in.");
+  } else if (!lastNames.length) {
+    alert("Your last name list is empty! Please fill them in.");
+  } else {
+    closeModal("create");
+    alert("Your preset has been created!");
+  }
 });
 
 document.getElementById("randomizeButton").addEventListener("click", () => {
