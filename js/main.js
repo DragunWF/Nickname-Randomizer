@@ -28,7 +28,7 @@ const modals = {
   reset: document.getElementById("resetModal"),
 };
 
-let currentPreset = new Preset();
+let currentPreset = new Preset(); // Preset that you can change in the preset creator
 let selectedPreset = presets[1]; // default preset
 let presetUIVisible = true; // Always set to false unless testing
 
