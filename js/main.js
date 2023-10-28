@@ -128,7 +128,26 @@ document.getElementById("resetPresetButton").addEventListener("click", () => {
 });
 
 document.getElementById("savePresetButton").addEventListener("click", () => {
-  // TODO: Implement preset saving
+  const jsonStr = JSON.stringify({
+    title: currentPreset.getTitle(),
+    firstNames: currentPreset.getNames().firstNames,
+    lastNames: currentPreset.getNames().lastNames,
+  });
+  const blob = new Blob([jsonStr], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+
+  const downloadLink = document.createElement("a");
+  downloadLink.href = url;
+  downloadLink.download = `${currentPreset.getTitle()}.json`; // file name
+
+  // Add the link to the DOM, trigger a click event, and remove it
+  downloadLink.style.display = "none";
+  document.body.appendChild(downloadLink);
+  downloadLink.click();
+  document.body.removeChild(downloadLink);
+
+  // Cleanup: Revoke the Blob URL after use to free up memory
+  URL.revokeObjectURL(url);
 });
 
 document.getElementById("loadPresetButton").addEventListener("click", () => {
