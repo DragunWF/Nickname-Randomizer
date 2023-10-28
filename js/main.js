@@ -3,6 +3,11 @@ import Preset from "./preset.js";
 const outputText = document.getElementById("output");
 const presetDropdownButton = document.getElementById("presetDropdownButton");
 const presetsDropdown = document.getElementById("presetsDropdown");
+const createPresetHeader = document.getElementById("createPresetHeader");
+
+// This button also serves as a saving button for presets and not just creation
+const createPresetButton = document.getElementById("createPresetButton");
+
 const presets = [
   new Preset("DragunWF (Default)", [], []),
   new Preset(
@@ -22,10 +27,6 @@ const presetDropdowns = {
 const presetFields = {
   firstName: document.getElementById("firstNameField"),
   lastName: document.getElementById("lastNameField"),
-};
-const modals = {
-  create: document.getElementById("createModal"),
-  reset: document.getElementById("resetModal"),
 };
 
 let currentPreset = new Preset(); // Preset that you can change in the preset creator
@@ -87,6 +88,77 @@ function getRandomItem(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
+function isCurrentPresetValidated() {
+  const firstNames = currentPreset.getNames().firstNames;
+  const lastNames = currentPreset.getNames().lastNames;
+  const title = document.getElementById("titleField").value;
+  let isValid = true;
+
+  if (!title.length) {
+    alert("Please fill in a title for this preset!");
+    isValid = false;
+  } else {
+    const takenTitles = presets.map((preset) => preset.title);
+    if (takenTitles.includes(title)) {
+      alert(
+        "There is a preset that already uses the same title. Please make a unique title!"
+      );
+      isValid = false;
+    }
+  }
+
+  if (!firstNames.length && !lastNames.length) {
+    alert(
+      "Your first name and last name lists are empty! Please fill them in."
+    );
+    isValid = false;
+  } else if (!firstNames.length) {
+    alert("Your first name list is empty! Please fill them in.");
+    isValid = false;
+  } else if (!lastNames.length) {
+    alert("Your last name list is empty! Please fill them in.");
+    isValid = false;
+  }
+
+  currentPreset.setTitle(isValid ? title : "No_Title");
+  return isValid;
+}
+
+function createPreset() {
+  if (isCurrentPresetValidated()) {
+    presets.push(currentPreset);
+    closeModal("create");
+    alert("Your preset has been created!");
+  }
+}
+
+function savePreset() {
+  if (isCurrentPresetValidated()) {
+    const jsonStr = JSON.stringify({
+      title: currentPreset.getTitle(),
+      firstNames: currentPreset.getNames().firstNames,
+      lastNames: currentPreset.getNames().lastNames,
+    });
+    const blob = new Blob([jsonStr], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+
+    const downloadLink = document.createElement("a");
+    downloadLink.href = url;
+    downloadLink.download = `${currentPreset.getTitle()}.json`; // file name
+
+    // Add the link to the DOM, trigger a click event, and remove it
+    downloadLink.style.display = "none";
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+
+    // Cleanup: Revoke the Blob URL after use to free up memory
+    URL.revokeObjectURL(url);
+
+    closeModal("create");
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   for (let i = 0; i < presets.length; i++) {
     presetsDropdown.innerHTML += `
@@ -121,12 +193,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-document
-  .getElementById("openCreateModalButton")
-  .addEventListener("click", () => {
-    modals.create.style.display = "block";
-  });
-
 document.getElementById("resetPresetButton").addEventListener("click", () => {
   // TODO: Implement preset reset
   for (let key in presetFields) {
@@ -139,64 +205,13 @@ document.getElementById("resetPresetButton").addEventListener("click", () => {
   closeModal("reset");
 });
 
-document.getElementById("savePresetButton").addEventListener("click", () => {
-  const jsonStr = JSON.stringify({
-    title: currentPreset.getTitle(),
-    firstNames: currentPreset.getNames().firstNames,
-    lastNames: currentPreset.getNames().lastNames,
-  });
-  const blob = new Blob([jsonStr], { type: "application/json" });
-  const url = URL.createObjectURL(blob);
-
-  const downloadLink = document.createElement("a");
-  downloadLink.href = url;
-  downloadLink.download = `${currentPreset.getTitle()}.json`; // file name
-
-  // Add the link to the DOM, trigger a click event, and remove it
-  downloadLink.style.display = "none";
-  document.body.appendChild(downloadLink);
-  downloadLink.click();
-  document.body.removeChild(downloadLink);
-
-  // Cleanup: Revoke the Blob URL after use to free up memory
-  URL.revokeObjectURL(url);
-});
-
 document.getElementById("loadPresetButton").addEventListener("click", () => {
   // TODO: Implement preset loading
 });
 
-document.getElementById("createPresetButton").addEventListener("click", () => {
-  // TODO: Implement preset creation
-  modals.create.style.display = "block";
-  const firstNames = currentPreset.getNames().firstNames;
-  const lastNames = currentPreset.getNames().lastNames;
-  const title = document.getElementById("titleField").value;
-
-  if (!title.length) {
-    alert("Please fill in a title for this preset!");
-  } else {
-    const takenTitles = presets.map((preset) => preset.title);
-    if (takenTitles.includes(title)) {
-      alert(
-        "There is a preset that already uses the same title. Please make a unique title!"
-      );
-    }
-  }
-
-  if (!firstNames.length && !lastNames.length) {
-    alert(
-      "Your first name and last name lists are empty! Please fill them in."
-    );
-  } else if (!firstNames.length) {
-    alert("Your first name list is empty! Please fill them in.");
-  } else if (!lastNames.length) {
-    alert("Your last name list is empty! Please fill them in.");
-  } else {
-    presets.push(currentPreset);
-    closeModal("create");
-    alert("Your preset has been created!");
-  }
+createPresetButton.addEventListener("click", () => {
+  const isSaving = createPresetButton.innerHTML === "Save";
+  isSaving ? savePreset() : createPreset();
 });
 
 document.getElementById("randomizeButton").addEventListener("click", () => {
@@ -210,7 +225,17 @@ document.getElementById("randomizeButton").addEventListener("click", () => {
 /* One line callbacks */
 document
   .getElementById("openCreateModalButton")
-  .addEventListener("click", () => openModal("create"));
+  .addEventListener("click", () => {
+    createPresetHeader.innerText = "Create Preset";
+    createPresetButton.innerText = "Create";
+    openModal("create");
+  });
+
+document.getElementById("savePresetButton").addEventListener("click", () => {
+  createPresetHeader.innerText = "Save Preset";
+  createPresetButton.innerText = "Save";
+  openModal("create");
+});
 
 document
   .getElementById("openResetModalButton")
