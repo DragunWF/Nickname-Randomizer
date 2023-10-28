@@ -4,13 +4,17 @@ class Preset {
   #lastNames;
 
   constructor(title, firstNames, lastNames) {
-    this.#title = title ? title : "No Title";
+    this.#title = title ? title : "No_Title";
     this.#firstNames = firstNames ? firstNames : [];
     this.#lastNames = lastNames ? lastNames : [];
   }
 
   getTitle() {
     return this.#title;
+  }
+
+  setTitle(value) {
+    this.#title = value;
   }
 
   getNames() {
