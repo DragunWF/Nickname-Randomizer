@@ -169,6 +169,10 @@ document
   .addEventListener("click", () => closeModal("reset"));
 
 document
+  .getElementById("closeResetModalButton")
+  .addEventListener("click", () => closeModal("reset"));
+
+document
   .getElementById("closeCreateModal")
   .addEventListener("click", () => closeModal("create"));
 
