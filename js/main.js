@@ -7,6 +7,7 @@ const presetDropdownButton = document.getElementById("presetDropdownButton");
 const presetsDropdown = document.getElementById("presetsDropdown");
 const loadFileInput = document.getElementById("loadFileInput");
 const resetModalDescription = document.getElementById("resetModalDescription");
+const titleField = document.getElementById("titleField");
 
 /* They both serve different functionalities depending on the header text */
 // Multi-Purpose Header
@@ -76,6 +77,16 @@ let presetUIVisible = false; // Always set to false unless testing
 
 function isNameTypeValidated(type) {
   return !(type !== "first" && type !== "last");
+}
+
+function updatePresetDropdownUI() {
+  presetsDropdown.innerHTML = "";
+  for (let i = 0; i < presets.length; i++) {
+    presetsDropdown.innerHTML += `
+      <span onclick="selectPreset(${i})">${presets[i].getTitle()}</span>
+    `;
+  }
+  presetsDropdown.innerHTML += '<span class="toggle-preset-ui">Custom</span>';
 }
 
 function addName(isFirstName) {
@@ -177,7 +188,7 @@ function getRandomItem(arr) {
 function isCurrentPresetValidated() {
   const firstNames = currentPreset.getNames().firstNames;
   const lastNames = currentPreset.getNames().lastNames;
-  const title = document.getElementById("titleField").value;
+  const title = titleField.value;
   let isValid = true;
 
   if (!title.length) {
@@ -214,6 +225,8 @@ function createPreset() {
   if (isCurrentPresetValidated()) {
     presets.push(currentPreset);
     closeModal("create");
+    updatePresetDropdownUI();
+    titleField.value = "";
     alert("Your preset has been created!");
   }
 }
@@ -241,17 +254,13 @@ function savePreset() {
     // Cleanup: Revoke the Blob URL after use to free up memory
     URL.revokeObjectURL(url);
 
+    titleField.value = "";
     closeModal("create");
   }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  for (let i = 0; i < presets.length; i++) {
-    presetsDropdown.innerHTML += `
-      <span onclick="selectPreset(${i})">${presets[i].getTitle()}</span>
-    `;
-  }
-  presetsDropdown.innerHTML += '<span class="toggle-preset-ui">Custom</span>';
+  updatePresetDropdownUI();
 
   // Add event listeners to all toggle buttons
   const toggleButtons = document.getElementsByClassName("toggle-preset-ui");
@@ -327,6 +336,7 @@ loadFileInput.addEventListener("change", () => {
       };
       reader.readAsText(selectedFile);
       presets.push(currentPreset);
+      updatePresetDropdownUI();
     } else {
       alert("No file has been selected!");
     }
