@@ -201,7 +201,7 @@ function isCurrentPresetValidated() {
     isValid = false;
   }
 
-  currentPreset.setTitle(isValid ? title : "No_Title");
+  currentPreset.setTitle(isValid ? title : "Default_Title");
   return isValid;
 }
 
