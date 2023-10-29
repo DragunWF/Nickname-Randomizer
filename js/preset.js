@@ -48,7 +48,13 @@ class Preset {
     }
   }
 
-  #deleteName(index, isFirstName) {}
+  #deleteName(index, isFirstName) {
+    if (isFirstName) {
+      this.#firstNames.splice(index, 1);
+    } else {
+      this.#lastNames.splice(index, 1);
+    }
+  }
 }
 
 console.log("preset.js has been loaded!");
