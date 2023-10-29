@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/DragunWF/NicknameRandomizer/issues"
   },
-  "homepage": "https://github.com/DragunWF/NicknameRandomizer#readme"
+  "homepage": "https://github.com/DragunWF/NicknameRandomizer#readme",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5"
+  }
 }
