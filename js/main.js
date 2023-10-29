@@ -11,12 +11,12 @@ const titleField = document.getElementById("titleField");
 
 /* They both serve different functionalities depending on the header text */
 // Multi-Purpose Header
-const createModalHeader = document.getElementById("createModalHeader"); // Create/Save Header
-const resetModalHeader = document.getElementById("resetModalHeader"); // Reset/Delete Header
+const createModalHeader = document.getElementById("createModalHeader"); // Create | Save Header
+const resetModalHeader = document.getElementById("resetModalHeader"); // Reset | Delete Header
 
 // Multi-Purpose buttons
-const createPresetButton = document.getElementById("createPresetButton"); // Save/Create
-const resetPresetButton = document.getElementById("resetPresetButton"); // Reset/Delete
+const createPresetButton = document.getElementById("createPresetButton"); // Save | Create
+const resetPresetButton = document.getElementById("resetPresetButton"); // Reset | Delete
 
 const presets = [
   new Preset(
