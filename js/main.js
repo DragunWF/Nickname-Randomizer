@@ -39,6 +39,11 @@ const presets = [
       "The Nerd",
       "The Genius",
       "The Brave",
+      "The Not So Bright",
+      "The Bright",
+      "The Goblin",
+      "The Knight",
+      "The Geek",
     ]
   ),
   new Preset(
@@ -73,7 +78,7 @@ function addName(isFirstName) {
     ? presetFields.firstName.value
     : presetFields.lastName.value;
   if (!content) {
-    alert(`${isFirstName ? "First name" : "Last name"} cannot be empty!`);
+    alert(`${isFirstName ? "First" : "Last"} name cannot be empty!`);
     return;
   }
 
@@ -297,6 +302,7 @@ loadFileInput.addEventListener("change", () => {
       reader.onload = (event) => {
         const data = JSON.parse(event.target.result); // parsing file contents
         currentPreset = new Preset(data.title, data.firstNames, data.lastNames);
+
         // Apply new data to UI elements
         presetDropdowns.firstNames.innerHTML = "";
         presetDropdowns.lastNames.innerHTML = "";
