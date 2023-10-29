@@ -198,7 +198,8 @@ button {
   padding: 7px;
   border-color: #1d1c1a;
   border-width: 3px;
-  transition: all 0.15s;
+  border-radius: 0;
+  transition: border-radius 0.15s;
 }
 
 .modal input:focus {
@@ -246,13 +247,18 @@ button {
   display: none;
 }
 
+#presetDropdownButton,
+#presetsDropdown,
+#presetsDropdown span {
+  max-width: 223px !important;
+  min-width: 223px !important;
+}
+
 #presetsDropdown {
   border-radius: 5px;
 }
 
 #presetsDropdown span {
-  max-width: 223px;
-  min-width: 223px;
   border-radius: 5px;
   border: #1d1c1a;
   border-width: 10px;
