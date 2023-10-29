@@ -5,6 +5,7 @@ const presetDropdownButton = document.getElementById("presetDropdownButton");
 const presetsDropdown = document.getElementById("presetsDropdown");
 const createPresetHeader = document.getElementById("createPresetHeader");
 const loadFileInput = document.getElementById("loadFileInput");
+const resetModalDescription = document.getElementById("resetModalDescription");
 
 // This button also serves as a saving button for presets and not just creation
 const createPresetButton = document.getElementById("createPresetButton");
@@ -44,17 +45,33 @@ function addName(isFirstName) {
   }
 
   if (isFirstName) {
-    presetDropdowns.firstNames.innerHTML += `
-      <span>${content}</span>
-    `;
-    presetFields.firstName.value = "";
+    addNameUI(content, "first");
+    presetFields.firstName.value = ""; // Empty first name text box
     currentPreset.addFirstName(content);
   } else {
-    presetDropdowns.lastNames.innerHTML += `
-      <span>${content}</span>
-    `;
-    presetFields.lastName.value = "";
+    addNameUI(content, "last");
+    presetFields.lastName.value = ""; // Empty last name text box
     currentPreset.addLastName(content);
+  }
+}
+
+function addNameUI(name, type) {
+  if (!name.length) {
+    throw new Error("Name cannot be empty!");
+  }
+  switch (type) {
+    case "first":
+      presetDropdowns.firstNames.innerHTML += `
+        <span onclick="deleteName(${i}, "first")">${name}</span>
+      `;
+      break;
+    case "last":
+      presetDropdowns.lastNames.innerHTML += `
+        <span onclick="deleteName(${i}, "last")">${name}</span>
+      `;
+      break;
+    default:
+      throw new Error("Unknown type!");
   }
 }
 
@@ -222,15 +239,14 @@ loadFileInput.addEventListener("change", () => {
       reader.onload = (event) => {
         const data = JSON.parse(event.target.result); // parsing file contents
         currentPreset = new Preset(data.title, data.firstNames, data.lastNames);
-
         // Apply new data to UI elements
         presetDropdowns.firstNames.innerHTML = "";
         presetDropdowns.lastNames.innerHTML = "";
         for (let name of currentPreset.getNames().firstNames) {
-          presetDropdowns.firstNames.innerHTML += `<span>${name}</span>`;
+          addNameUI(name, "first");
         }
         for (let name of currentPreset.getNames().lastNames) {
-          presetDropdowns.lastNames.innerHTML += `<span>${name}</span>`;
+          addNameUI(name, "last");
         }
       };
       reader.readAsText(selectedFile);
@@ -278,7 +294,10 @@ document.getElementById("savePresetButton").addEventListener("click", () => {
 
 document
   .getElementById("openResetModalButton")
-  .addEventListener("click", () => openModal("reset"));
+  .addEventListener("click", () => {
+    "Are you sure you want to reset your current preset? This will remove all first names and last names previously added.";
+    openModal("reset");
+  });
 
 document
   .getElementById("closeResetModal")
@@ -311,6 +330,21 @@ window.selectPreset = (index) => {
   }
   selectedPreset = presets[index];
   presetDropdownButton.innerText = selectedPreset.getTitle();
+};
+
+window.deleteName = (index, type) => {
+  if (type !== "first" && type !== "last") {
+    throw new Error(
+      'Unknown type! Types can either only be "first" or "last"!'
+    );
+  }
+  if (
+    index < 0 ||
+    index >= currentPreset.getNames().firstNames ||
+    index >= currentPreset.getNames().lastNames
+  ) {
+    throw new Error("Index is out of range!");
+  }
 };
 
 console.log("main.js has been loaded!");
