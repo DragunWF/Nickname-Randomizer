@@ -30,6 +30,8 @@ const presets = [
       "Larry",
       "SeaGong",
       "Momo",
+      "SkywarOwl",
+      "Luq",
     ],
     [
       "The Terrible",
@@ -44,6 +46,9 @@ const presets = [
       "The Goblin",
       "The Knight",
       "The Geek",
+      "The Zombie",
+      "The Robot",
+      "The Hacker",
     ]
   ),
   new Preset(
@@ -274,15 +279,22 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-document.getElementById("resetPresetButton").addEventListener("click", () => {
-  // TODO: Implement preset reset
-  for (let key in presetFields) {
-    presetFields[key].value = "";
+resetPresetButton.addEventListener("click", () => {
+  const header = resetModalHeader.innerText.split("-")[1].trim();
+  if (header === "Reset") {
+    for (let key in presetFields) {
+      presetFields[key].value = "";
+    }
+    for (let key in presetDropdowns) {
+      presetDropdowns[key].innerHTML = "";
+    }
+    currentPreset = new Preset();
+  } else {
+    deleteName(
+      parseInt(resetPresetButton.getAttribute("index")),
+      resetPresetButton.getAttribute("nameType")
+    );
   }
-  for (let key in presetDropdowns) {
-    presetDropdowns[key].innerHTML = "";
-  }
-  currentPreset = new Preset();
   closeModal("reset");
 });
 
@@ -341,7 +353,7 @@ document.getElementById("randomizeButton").addEventListener("click", () => {
   )}`;
 });
 
-/* One line callbacks */
+/* One line callbacks - Forgive me father for I have sinned */
 document
   .getElementById("openCreateModalButton")
   .addEventListener("click", () => {
@@ -363,6 +375,7 @@ document
       Are you sure you want to reset your current preset? This will remove all first names 
       and last names previously added.
     `;
+    resetModalHeader.innerText = "Are you sure? - Reset";
     openModal("reset");
   });
 
@@ -420,6 +433,8 @@ window.deleteName = (index, type) => {
   resetModalDescription.innerText = `
     Are you sure you want to delete the first name "${names[index]}". This action cannot be undone!
   `;
+  resetPresetButton.setAttribute("index", index);
+  resetPresetButton.setAttribute("nameType", type);
   openModal("reset");
 };
 
