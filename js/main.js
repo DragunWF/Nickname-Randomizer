@@ -15,7 +15,7 @@ const resetModalHeader = document.getElementById("resetModalHeader"); // Reset/D
 
 // Multi-Purpose buttons
 const createPresetButton = document.getElementById("createPresetButton"); // Save/Create
-const resetPresetButton = document.getElementById("reset");
+const resetPresetButton = document.getElementById("resetPresetButton"); // Reset/Delete
 
 const presets = [
   new Preset("DragunWF (Default)", [], []),
@@ -43,7 +43,7 @@ let selectedPreset = presets[1]; // default preset
 let presetUIVisible = true; // Always set to false unless testing
 
 function isNameTypeValidated(type) {
-  return type !== "first" && type !== "last";
+  return !(type !== "first" && type !== "last");
 }
 
 function addName(isFirstName) {
@@ -70,15 +70,19 @@ function addNameUI(name, type) {
   if (!name.length) {
     throw new Error("Name cannot be empty!");
   }
+  const index =
+    type === "last"
+      ? currentPreset.getNames().firstNames.length
+      : currentPreset.getNames().lastNames.length;
   switch (type) {
     case "first":
       presetDropdowns.firstNames.innerHTML += `
-        <span onclick="deleteName(${i}, "first")">${name}</span>
+        <span onclick="deleteName(${index}, 'first')">${name}</span>
       `;
       break;
     case "last":
       presetDropdowns.lastNames.innerHTML += `
-        <span onclick="deleteName(${i}, "last")">${name}</span>
+        <span onclick="deleteName(${index}, 'last')">${name}</span>
       `;
       break;
     default:
@@ -87,11 +91,24 @@ function addNameUI(name, type) {
 }
 
 function deleteName(index, type) {
-  if (!isNameTypeValidated(type)) {
-    throw new Error("deleteName(): Type is not recognized!");
+  switch (type) {
+    case "first":
+      currentPreset.deleteFirstName(index);
+      presetDropdowns.firstNames.innerHTML = "";
+      for (let name of currentPreset.getNames().firstNames) {
+        addNameUI(name, "first");
+      }
+      break;
+    case "last":
+      currentPreset.deleteLastName(index);
+      presetDropdowns.lastNames.innerHTML = "";
+      for (let name of currentPreset.getNames().lastNames) {
+        addNameUI(name, "last");
+      }
+      break;
+    default:
+      throw new Error("deleteName(): Type is not recognized!");
   }
-  const arr = [];
-  arr.splice;
 }
 
 function toggleModal(modalName, operation) {
@@ -357,24 +374,25 @@ window.selectPreset = (index) => {
 window.deleteName = (index, type) => {
   if (!isNameTypeValidated(type)) {
     throw new Error(
-      'Unknown type! Types can either only be "first" or "last"!'
+      `Unknown type "${type}"! Types can either only be "first" or "last"!`
     );
   }
   if (
     index < 0 ||
-    index >= currentPreset.getNames().firstNames ||
-    index >= currentPreset.getNames().lastNames
+    (type === "first" && index >= currentPreset.getNames().firstNames.length) ||
+    (type === "last" && index >= currentPreset.getNames().lastNames.length)
   ) {
-    throw new Error("Index is out of range!");
+    throw new Error(`Index "${index}" is out of range!`);
   }
   const names =
     type === "last"
       ? currentPreset.getNames().firstNames
       : currentPreset.getNames().lastNames;
-  resetModalHeader.innerText = `Are you sure? (${type}: ${index})`;
+  resetModalHeader.innerText = `Are you sure? - Delete ${type} name`;
   resetModalDescription.innerText = `
-    Are you sure you want to delete the first name "${names[i]}". This action cannot be undone!
+    Are you sure you want to delete the first name "${names[index]}". This action cannot be undone!
   `;
+  openModal("reset");
 };
 
 console.log("main.js has been loaded!");
