@@ -249,10 +249,9 @@ button {
 }
 
 #presetDropdownButton,
-#presetsDropdown,
-#presetsDropdown span {
-  max-width: 223px !important;
-  min-width: 223px !important;
+#presetsDropdown {
+  max-width: 245px;
+  min-width: 245px;
 }
 
 #presetsDropdown {
@@ -263,4 +262,6 @@ button {
   border-radius: 5px;
   border: #1d1c1a;
   border-width: 10px;
+  max-width: 220px;
+  min-width: 220px;
 }
