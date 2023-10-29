@@ -31,12 +31,12 @@
         </div>
         <!-- End of Randomizer Interface -->
 
-        <!-- Create Modal -->
+        <!-- Create/Save Modal -->
         <div class="modal" id="createModal">
           <div class="modal-content">
             <span class="close" id="closeCreateModal">&times;</span>
             <div class="create-modal-container flex">
-              <h3 id="createPresetHeader">Create Preset</h3>
+              <h3 id="createModalHeader">Create Preset</h3>
               <p>Enter the title of your preset</p>
               <label for="fname">Preset Title</label>
               <input
@@ -55,21 +55,21 @@
         </div>
         <!-- End of Create Modal -->
 
-        <!-- Reset Modal -->
+        <!-- Reset/Delete Name Modal -->
         <div class="modal" id="resetModal">
           <div class="modal-content">
             <span class="close" id="closeResetModal">&times;</span>
-            <h2>Are you sure?</h2>
-            <p>
+            <h2 id="resetModalHeader">Are you sure?</h2>
+            <p id="resetModalDescription">
               Are you sure you want to reset your current preset? This will
               remove all first names and last names previously added.
             </p>
             <div class="buttons-container flex">
               <button class="buttons" id="closeResetModalButton">
-                No, Go Back...
+                No, take me back!
               </button>
               <button class="buttons" id="resetPresetButton">
-                Yes, Please Reset!
+                Yes, I am absolutely sure!
               </button>
             </div>
           </div>
@@ -143,7 +143,9 @@
     </div>
     <!-- End of Background Tags-->
 
+    <!-- Scripts Section -->
     <script type="module" src="js/preset.js"></script>
     <script type="module" src="js/main.js"></script>
+    <!-- End of Scripts Section -->
   </body>
 </html>
