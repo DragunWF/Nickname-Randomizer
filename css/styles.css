@@ -118,6 +118,7 @@ button {
 .preset-dropdown-group {
   margin-top: 0;
   gap: 15px;
+  align-items: flex-start;
 }
 
 .preset-dropdown-group button {
