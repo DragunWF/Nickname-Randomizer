@@ -1,14 +1,21 @@
 import Preset from "./preset.js";
 
+// TODO: Consider making a utility class to divide and simplify code...
+
 const outputText = document.getElementById("output");
 const presetDropdownButton = document.getElementById("presetDropdownButton");
 const presetsDropdown = document.getElementById("presetsDropdown");
-const createPresetHeader = document.getElementById("createPresetHeader");
 const loadFileInput = document.getElementById("loadFileInput");
 const resetModalDescription = document.getElementById("resetModalDescription");
 
-// This button also serves as a saving button for presets and not just creation
-const createPresetButton = document.getElementById("createPresetButton");
+/* They both serve different functionalities depending on the header text */
+// Multi-Purpose Header
+const createModalHeader = document.getElementById("createModalHeader"); // Create/Save Header
+const resetModalHeader = document.getElementById("resetModalHeader"); // Reset/Delete Header
+
+// Multi-Purpose buttons
+const createPresetButton = document.getElementById("createPresetButton"); // Save/Create
+const resetPresetButton = document.getElementById("reset");
 
 const presets = [
   new Preset("DragunWF (Default)", [], []),
@@ -34,6 +41,10 @@ const presetFields = {
 let currentPreset = new Preset(); // Preset that you can change in the preset creator
 let selectedPreset = presets[1]; // default preset
 let presetUIVisible = true; // Always set to false unless testing
+
+function isNameTypeValidated(type) {
+  return type !== "first" && type !== "last";
+}
 
 function addName(isFirstName) {
   const content = isFirstName
@@ -73,6 +84,14 @@ function addNameUI(name, type) {
     default:
       throw new Error("Unknown type!");
   }
+}
+
+function deleteName(index, type) {
+  if (!isNameTypeValidated(type)) {
+    throw new Error("deleteName(): Type is not recognized!");
+  }
+  const arr = [];
+  arr.splice;
 }
 
 function toggleModal(modalName, operation) {
@@ -281,13 +300,13 @@ document.getElementById("randomizeButton").addEventListener("click", () => {
 document
   .getElementById("openCreateModalButton")
   .addEventListener("click", () => {
-    createPresetHeader.innerText = "Create Preset";
+    createModalHeader.innerText = "Create Preset";
     createPresetButton.innerText = "Create";
     openModal("create");
   });
 
 document.getElementById("savePresetButton").addEventListener("click", () => {
-  createPresetHeader.innerText = "Save Preset";
+  createModalHeader.innerText = "Save Preset";
   createPresetButton.innerText = "Save";
   openModal("create");
 });
@@ -295,7 +314,10 @@ document.getElementById("savePresetButton").addEventListener("click", () => {
 document
   .getElementById("openResetModalButton")
   .addEventListener("click", () => {
-    "Are you sure you want to reset your current preset? This will remove all first names and last names previously added.";
+    resetModalDescription.innerText = `
+      Are you sure you want to reset your current preset? This will remove all first names 
+      and last names previously added.
+    `;
     openModal("reset");
   });
 
@@ -333,7 +355,7 @@ window.selectPreset = (index) => {
 };
 
 window.deleteName = (index, type) => {
-  if (type !== "first" && type !== "last") {
+  if (!isNameTypeValidated(type)) {
     throw new Error(
       'Unknown type! Types can either only be "first" or "last"!'
     );
@@ -345,6 +367,14 @@ window.deleteName = (index, type) => {
   ) {
     throw new Error("Index is out of range!");
   }
+  const names =
+    type === "last"
+      ? currentPreset.getNames().firstNames
+      : currentPreset.getNames().lastNames;
+  resetModalHeader.innerText = `Are you sure? (${type}: ${index})`;
+  resetModalDescription.innerText = `
+    Are you sure you want to delete the first name "${names[i]}". This action cannot be undone!
+  `;
 };
 
 console.log("main.js has been loaded!");
