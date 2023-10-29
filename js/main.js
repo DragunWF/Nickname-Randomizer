@@ -72,7 +72,7 @@ const presetFields = {
 
 let currentPreset = new Preset(); // Preset that you can change in the preset creator
 let selectedPreset = presets[0]; // default preset
-let presetUIVisible = true; // Always set to false unless testing
+let presetUIVisible = false; // Always set to false unless testing
 
 function isNameTypeValidated(type) {
   return !(type !== "first" && type !== "last");
@@ -251,7 +251,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <span onclick="selectPreset(${i})">${presets[i].getTitle()}</span>
     `;
   }
-  presetsDropdown.innerHTML += "<span>Custom</span>";
+  presetsDropdown.innerHTML += '<span class="toggle-preset-ui">Custom</span>';
 
   // Add event listeners to all toggle buttons
   const toggleButtons = document.getElementsByClassName("toggle-preset-ui");
