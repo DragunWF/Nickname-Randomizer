@@ -241,6 +241,19 @@ button {
   font-weight: bold;
 }
 
+/* ID Tag Styles */
 #loadFileInput {
   display: none;
+}
+
+#presetsDropdown {
+  border-radius: 5px;
+}
+
+#presetsDropdown span {
+  max-width: 223px;
+  min-width: 223px;
+  border-radius: 5px;
+  border: #1d1c1a;
+  border-width: 10px;
 }
