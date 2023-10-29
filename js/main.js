@@ -18,7 +18,29 @@ const createPresetButton = document.getElementById("createPresetButton"); // Sav
 const resetPresetButton = document.getElementById("resetPresetButton"); // Reset/Delete
 
 const presets = [
-  new Preset("DragunWF (Default)", [], []),
+  new Preset(
+    "DragunWF (Default)",
+    [
+      "Jewker",
+      "CPT",
+      "Dragun",
+      "Faith",
+      "Thrawn",
+      "Mortis",
+      "Larry",
+      "SeaGong",
+      "Momo",
+    ],
+    [
+      "The Terrible",
+      "The Programmer",
+      "The Horrible",
+      "The Pro Gamer",
+      "The Nerd",
+      "The Genius",
+      "The Brave",
+    ]
+  ),
   new Preset(
     "Thrawn",
     ["Jewker", "CPT", "Dragun", "Faith", "Thrawn", "Mortis"],
@@ -39,7 +61,7 @@ const presetFields = {
 };
 
 let currentPreset = new Preset(); // Preset that you can change in the preset creator
-let selectedPreset = presets[1]; // default preset
+let selectedPreset = presets[0]; // default preset
 let presetUIVisible = true; // Always set to false unless testing
 
 function isNameTypeValidated(type) {
