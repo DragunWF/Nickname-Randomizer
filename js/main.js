@@ -363,6 +363,40 @@ document.getElementById("randomizeButton").addEventListener("click", () => {
   )}`;
 });
 
+window.selectPreset = (index) => {
+  if (index < 0 || index >= presets.length) {
+    throw new Error("Invalid Index!");
+  }
+  selectedPreset = presets[index];
+  presetDropdownButton.innerText = selectedPreset.getTitle();
+};
+
+window.deleteName = (index, type) => {
+  if (!isNameTypeValidated(type)) {
+    throw new Error(
+      `Unknown type "${type}"! Types can either only be "first" or "last"!`
+    );
+  }
+  if (
+    index < 0 ||
+    (type === "first" && index >= currentPreset.getNames().firstNames.length) ||
+    (type === "last" && index >= currentPreset.getNames().lastNames.length)
+  ) {
+    throw new Error(`Index "${index}" is out of range!`);
+  }
+  const names =
+    type === "last"
+      ? currentPreset.getNames().firstNames
+      : currentPreset.getNames().lastNames;
+  resetModalHeader.innerText = `Are you sure? - Delete ${type} name`;
+  resetModalDescription.innerText = `
+    Are you sure you want to delete the first name "${names[index]}". This action cannot be undone!
+  `;
+  resetPresetButton.setAttribute("index", index);
+  resetPresetButton.setAttribute("nameType", type);
+  openModal("reset");
+};
+
 /* One line callbacks - Forgive me father for I have sinned */
 document
   .getElementById("openCreateModalButton")
@@ -413,39 +447,5 @@ document
   .getElementById("addLastNameButton")
   .addEventListener("click", () => addName(false));
 /* End of one line callbacks */
-
-window.selectPreset = (index) => {
-  if (index < 0 || index >= presets.length) {
-    throw new Error("Invalid Index!");
-  }
-  selectedPreset = presets[index];
-  presetDropdownButton.innerText = selectedPreset.getTitle();
-};
-
-window.deleteName = (index, type) => {
-  if (!isNameTypeValidated(type)) {
-    throw new Error(
-      `Unknown type "${type}"! Types can either only be "first" or "last"!`
-    );
-  }
-  if (
-    index < 0 ||
-    (type === "first" && index >= currentPreset.getNames().firstNames.length) ||
-    (type === "last" && index >= currentPreset.getNames().lastNames.length)
-  ) {
-    throw new Error(`Index "${index}" is out of range!`);
-  }
-  const names =
-    type === "last"
-      ? currentPreset.getNames().firstNames
-      : currentPreset.getNames().lastNames;
-  resetModalHeader.innerText = `Are you sure? - Delete ${type} name`;
-  resetModalDescription.innerText = `
-    Are you sure you want to delete the first name "${names[index]}". This action cannot be undone!
-  `;
-  resetPresetButton.setAttribute("index", index);
-  resetPresetButton.setAttribute("nameType", type);
-  openModal("reset");
-};
 
 console.log("main.js has been loaded!");
