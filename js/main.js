@@ -234,7 +234,7 @@ function createPreset() {
     closeModal("create");
     updatePresetDropdownUI();
     titleField.value = "";
-    alert("Your preset has been created!");
+    alert(`Your preset "${currentPreset.getTitle()}" has been created!`);
   }
 }
 
