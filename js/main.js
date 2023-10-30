@@ -363,12 +363,25 @@ createPresetButton.addEventListener("click", () => {
   isSaving ? savePreset() : createPreset();
 });
 
+let previouslyChosen = { firstName: null, lastName: null };
 document.getElementById("randomizeButton").addEventListener("click", () => {
   const firstNameArr = selectedPreset.getNames().firstNames;
   const lastNameArr = selectedPreset.getNames().lastNames;
-  outputText.innerText = `${getRandomItem(firstNameArr)} ${getRandomItem(
-    lastNameArr
-  )}`;
+  const chosen = {
+    firstName: getRandomItem(firstNameArr),
+    lastName: getRandomItem(lastNameArr),
+  };
+  if (firstNameArr.length > 1 || lastNameArr.length > 1) {
+    while (
+      chosen.firstName === previouslyChosen.firstName &&
+      chosen.lastName === previouslyChosen.lastName
+    ) {
+      chosen.firstName = getRandomItem(firstNameArr);
+      chosen.lastName = getRandomItem(lastNameArr);
+    }
+  }
+  previouslyChosen = chosen;
+  outputText.innerText = `${chosen.firstName} ${chosen.lastName}`;
 });
 
 window.selectPreset = (index) => {
