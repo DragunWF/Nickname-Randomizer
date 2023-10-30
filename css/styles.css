@@ -243,8 +243,9 @@ button {
   margin-top: 5px;
   font-weight: bold;
 }
+/* End of Modal Section */
 
-/* ID Tag Styles */
+/* ID Tag Section */
 #loadFileInput {
   display: none;
 }
@@ -266,3 +267,4 @@ button {
   max-width: 220px;
   min-width: 220px;
 }
+/* End of ID Tag Section */
