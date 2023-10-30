@@ -217,12 +217,19 @@ function isCurrentPresetValidated() {
     isValid = false;
   }
 
-  currentPreset.setTitle(isValid ? title : "Default_Title");
   return isValid;
 }
 
 function createPreset() {
   if (isCurrentPresetValidated()) {
+    // To prevent loaded presets from being modified when creating a new one
+    const overridePreset = new Preset(
+      titleField.value,
+      currentPreset.getNames().firstNames,
+      currentPreset.getNames().lastNames
+    );
+    currentPreset = overridePreset;
+
     presets.push(currentPreset);
     closeModal("create");
     updatePresetDropdownUI();
