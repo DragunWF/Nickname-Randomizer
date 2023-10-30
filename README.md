@@ -6,6 +6,6 @@ A nickname generator to mess around with, orignally made for my group of friends
 
 ## Links
 
-- [Nickname Randomizer]()
+- [Nickname Randomizer](https://nickname-randomizer.netlify.app/)
 - [My Website](https://dragunwf.onrender.com)
 - [My Discord Server](https://discord.gg/9JdnnPN)
