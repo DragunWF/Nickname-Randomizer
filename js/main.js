@@ -333,10 +333,11 @@ loadFileInput.addEventListener("change", () => {
         for (let name of currentPreset.getNames().lastNames) {
           addNameUI(name, "last");
         }
+        presets.push(currentPreset);
+        updatePresetDropdownUI();
+        alert(`Preset "${currentPreset.getTitle()}" has been loaded!`);
       };
       reader.readAsText(selectedFile);
-      presets.push(currentPreset);
-      updatePresetDropdownUI();
     } else {
       alert("No file has been selected!");
     }
