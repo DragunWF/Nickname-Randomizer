@@ -8,7 +8,7 @@ A nickname generator to mess around with, orignally made for my group of friends
 
 In the preset creator interface. You can save and load your own presets in `JSON` format.
 
-[Preset Creator Image](/images/preset-creator.JPG)
+![Preset Creator Image](/images/preset-creator.JPG)
 
 ### Example of a saved preset in `JSON` format
 
