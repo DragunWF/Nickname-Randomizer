@@ -80,6 +80,10 @@ let currentPreset = new Preset(); // Preset that you can change in the preset cr
 let selectedPreset = presets[0]; // default preset
 let presetUIVisible = false; // Always set to false unless testing
 
+function onButtonClick(id, func) {
+  document.getElementById(id).addEventListener("click", func);
+}
+
 function isNameTypeValidated(type) {
   return !(type !== "first" && type !== "last");
 }
@@ -423,7 +427,6 @@ window.deleteName = (index, type) => {
   openModal("reset");
 };
 
-/* One line callbacks - Forgive me father for I have sinned */
 document
   .getElementById("openCreateModalButton")
   .addEventListener("click", () => {
@@ -442,36 +445,20 @@ document
   .getElementById("openResetModalButton")
   .addEventListener("click", () => {
     resetModalDescription.innerText = `
-      Are you sure you want to reset your current preset? This will remove all first names 
-      and last names previously added.
-    `;
+  Are you sure you want to reset your current preset? This will remove all first names 
+  and last names previously added.
+  `;
     resetModalHeader.innerText = "Are you sure? - Reset";
     openModal("reset");
   });
 
-document
-  .getElementById("closeResetModal")
-  .addEventListener("click", () => closeModal("reset"));
-
-document
-  .getElementById("closeResetModalButton")
-  .addEventListener("click", () => closeModal("reset"));
-
-document
-  .getElementById("closeCreateModal")
-  .addEventListener("click", () => closeModal("create"));
-
-document
-  .getElementById("closeCreateModalButton")
-  .addEventListener("click", () => closeModal("create"));
-
-document
-  .getElementById("addFirstNameButton")
-  .addEventListener("click", () => addName(true));
-
-document
-  .getElementById("addLastNameButton")
-  .addEventListener("click", () => addName(false));
+/* One line callbacks - Forgive me father for I have sinned */
+onButtonClick("closeResetModal", () => closeModal("reset"));
+onButtonClick("closeResetModalButton", () => closeModal("reset"));
+onButtonClick("closeCreateModal", () => closeModal("create"));
+onButtonClick("closeCreateModalButton", () => closeModal("create"));
+onButtonClick("addFirstNameButton", () => addName(true));
+onButtonClick("addLastNameButton", () => addName(false));
 /* End of one line callbacks */
 
 console.log("main.js has been loaded!");
