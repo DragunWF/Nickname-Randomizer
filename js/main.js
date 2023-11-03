@@ -33,6 +33,8 @@ const presets = [
       "Momo",
       "SkywarOwl",
       "Luq",
+      "Hainz",
+      "Aurora",
     ],
     [
       "The Terrible",
@@ -50,6 +52,9 @@ const presets = [
       "The Zombie",
       "The Robot",
       "The Hacker",
+      "The Third",
+      "The King",
+      "The Emperor",
     ]
   ),
   new Preset(
