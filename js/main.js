@@ -60,7 +60,7 @@ const presets = [
   new Preset(
     "Thrawn",
     ["Jewker", "CPT", "Dragun", "Faith", "Thrawn", "Mortis"],
-    ["The Slut", "The Pro", "The Horny", "The Brave", "The Supergay"]
+    ["The S***", "The Pro", "The Energetic", "The Brave", "The Super**y"]
   ),
 ];
 const interfaces = {
